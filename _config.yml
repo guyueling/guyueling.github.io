@@ -5,7 +5,7 @@
 # Site
 title: 古道存的博客
 subtitle: ''
-description: '古道存的博客'
+description: ''
 keywords:
 author: gudaocun
 language: zh-CN
@@ -97,6 +97,8 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: volantis
+theme_config:
+  seo_title: 古道存的博客
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
