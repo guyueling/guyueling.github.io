@@ -1,0 +1,30 @@
+# 站点级侧边栏组件覆盖
+#
+# 覆盖 themes/volantis/_data/widgets.yml 里的同名组件。
+#
+# 为什么不直接改主题里的那个文件：themes/volantis 是 git 子模块
+# （见仓库根的 .gitmodules），改它不会进主仓库，部署平台拉下来
+# 拿到的还是原版主题，改动会被抹掉。
+#
+# 为什么放这里：主题的 scripts/events/lib/config.js 里有这么一段
+#
+#     var widgets = ...读 themes/volantis/_data/widgets.yml...
+#     merge(widgets, hexo.theme.config.sidebar.widget_library)
+#     if (data.widgets) { merge(widgets, data.widgets); }   // ← 本文件
+#
+# data.widgets 就是 source/_data/widgets.yml，位于覆盖链最顶层。
+#
+# ⚠️ merge() 对「数组」是整体替换、不是逐项合并，所以 social
+#    必须完整写出，不能只写改动的那一条。
+
+blogger:
+  social:
+    - icon: fa-solid fa-rss
+      url: /atom.xml
+    - icon: fa-solid fa-envelope
+      url: mailto:yunkeyu@foxmail.com
+    # 原来是主题作者的 https://github.com/volantis-x/ ，改成你自己的
+    - icon: fab fa-github
+      url: https://github.com/guyueling
+    - icon: fa-solid fa-headphones-alt
+      url: /
