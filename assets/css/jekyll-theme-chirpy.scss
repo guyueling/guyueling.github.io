@@ -1,0 +1,27 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* ==== 自定义样式开始 ==== */
+
+/* 头像裁成圆形。
+   主题原样式里 #avatar 没有 border-radius，而它带了
+   box-shadow: <色> 0 0 0 2px 的 2px 外框 —— box-shadow 是跟着元素的
+   方形盒子画的，所以会看到「圆形照片 + 方形光圈」。
+   给它加上 50% 圆角，外框就跟着变圆；配合 overflow:hidden，
+   里面的 img 也会被裁成圆形。 */
+#avatar {
+  border-radius: 50%;
+}
+
+/* ==== 自定义样式结束 ==== */
