@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$Title)
+﻿param([Parameter(Mandatory=$true)][string]$Title)
 
 $root = Split-Path -Parent $PSScriptRoot
 $date = Get-Date -Format 'yyyy-MM-dd'
@@ -8,7 +8,7 @@ $file = Join-Path $root "_posts\$date-$slug.md"
 
 if (Test-Path $file) { Write-Host "文件已存在: $file" -ForegroundColor Yellow; exit 1 }
 
-@"
+$content = @"
 ---
 title: $Title
 date: $date $time +0800
@@ -23,7 +23,11 @@ tags: []
 ## 小标题
 
 正文...
-"@ | Set-Content -Path $file -Encoding UTF8
+"@
+
+# 显式写成「无 BOM 的 UTF-8」—— Markdown 带 BOM 会让 Jekyll 认不出 front matter
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+[System.IO.File]::WriteAllText($file, $content, $utf8NoBom)
 
 Write-Host ""
 Write-Host "已创建: $file" -ForegroundColor Green

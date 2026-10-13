@@ -1,4 +1,4 @@
-param([string]$Message)
+﻿param([string]$Message)
 
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
